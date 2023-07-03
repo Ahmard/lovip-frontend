@@ -1,4 +1,5 @@
 export function useUrl(uri?: string): string {
+  console.log(localStorage.getItem('server'))
   return `${localStorage.getItem('server')}/${uri}`
 }
 

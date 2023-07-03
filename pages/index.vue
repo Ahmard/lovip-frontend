@@ -34,14 +34,14 @@
             <div v-loading="is_fetching" style="min-height: 200px; width: inherit">
               <div class="row">
                 <div v-if="!is_fetched">
-                  <el-empty :image-size="200" />
+                  <el-empty :image-size="200"/>
                 </div>
 
                 <div
                   v-if="is_fetched"
                   v-for="item in videos"
                   class="col-3 cursor-pointer"
-                  @click="watch_video(item)">
+                  @click="e => watch_video(e, item)">
                   <el-card class="mb-2 listing-item hoverable" shadow="always">
                     <el-image
                       :src="item.thumbnail_url"
@@ -57,6 +57,12 @@
                     </el-image>
                     <div class="mt-2">
                       <b>Name:</b> {{ item.name }}
+                    </div>
+
+                    <div class="mt-auto mb-0 text-end">
+                      <el-button :icon="ElIconDownload" @click="download(item)">
+                        Download
+                      </el-button>
                     </div>
                   </el-card>
                 </div>
@@ -80,6 +86,7 @@
 import {xhrGet} from "~/helpers/xhr";
 import {ListingItem} from "~/models/listing.item";
 import SetFolderDialog from "~/components/Listing/SetFolderDialog.vue";
+import {HtmlEvent} from "~/types/html.event";
 
 let mode = ref('create');
 let set_folder_dialog = ref(false)
@@ -123,8 +130,14 @@ function fetch_listing(folder: string) {
     .finally(() => is_fetching.value = false)
 }
 
-function watch_video(video: ListingItem) {
-  useRouter().push(`/watch?v=${video.id}`)
+function watch_video(e: HtmlEvent, video: ListingItem) {
+  if (e.currentTarget.nodeName === 'DIV') {
+    useRouter().push(`/watch?v=${video.id}`)
+  }
+}
+
+function download(video: ListingItem) {
+  window.open(useApiUrl(`movies/${video.id}/watch`), '_blank')
 }
 
 if (folder.value) {
@@ -136,6 +149,7 @@ if (folder.value) {
 .listing-item {
   min-height: 300px;
   inline-size: 340px;
+  margin-right: 10px!important;
   overflow-wrap: break-word;
 }
 </style>
