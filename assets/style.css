@@ -1,0 +1,58 @@
+@import "variables.css";
+
+.el-input__wrapper.is-focus {
+  /*border-color: var(--bs-primary-border-color)!important;*/
+}
+
+.el-button-primary {
+  /*background-color: var(--bs-primary) !important;*/
+  /*border-color: var(--bs-primary) !important;*/
+}
+
+.el-button-primary:hover {
+  /*background-color: var(--bs-primary-border-color) !important;*/
+}
+
+.el-collapse {
+  --el-collapse-header-font-size: 15px !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.row > * {
+  padding-right: calc(var(--bs-gutter-x) * 1.3)
+}
+
+.force-show-sm {
+  display: block !important;
+}
+
+.hide-btn-icon button .el-icon ~ span {
+  display: none !important;
+}
+
+.list-item {
+  padding: 10px;
+  border-bottom: 1px solid var(--el-card-border-color);
+}
+
+.text-primary {
+  color: var(--el-color-primary) !important;
+}
+
+.hoverable:hover {
+  background-color: #e7dddd;
+}
+
+@media (max-width: 768px) {
+  button:not(.force-show-sm) .el-icon ~ span {
+    display: none !important;
+  }
+
+  .el-main {
+    padding-left: 0 !important;
+    padding-right: 5px !important;
+  }
+}
